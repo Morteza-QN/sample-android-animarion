@@ -15,6 +15,16 @@
         android:contentDescription="@string/image_animation"
         app:srcCompat="@drawable/animation_image" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_main_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:scaleType="centerInside"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/success" />
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_main"
         android:layout_width="wrap_content"

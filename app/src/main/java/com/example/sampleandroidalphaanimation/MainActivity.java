@@ -1,5 +1,8 @@
 package com.example.sampleandroidalphaanimation;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +17,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -83,16 +88,60 @@ public class MainActivity extends AppCompatActivity {
         animationSet.addAnimation(alphaAnimation);
         animationSet.addAnimation(translateAnimation);
 
+        //Lottie Animation lib
+        final LottieAnimationView lottieAnimationView = findViewById(R.id.lottie_main_animation);
 
         final ImageView imageView   = findViewById(R.id.im_main);
         View            playAnimBtn = findViewById(R.id.fab_main);
+
+        //shake animation
+        final ObjectAnimator shakeAnimation = ObjectAnimator.ofFloat(playAnimBtn, "rotation", 0f, 20f, 0f, -20f, 0f);
+        shakeAnimation.setRepeatCount(1);
+        shakeAnimation.setDuration(300);
+        shakeAnimation.start();
+
         playAnimBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imageView.startAnimation(animationSet);
                 Log.i(TAG, "onClick: playAnimBtn");
+
+                shakeAnimation.start();
+
+                //lottieAnimationView.setProgress(1f);
+                lottieAnimationView.playAnimation();
             }
         });
+
+        lottieAnimationView.addAnimatorUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Log.i(TAG, "onAnimationUpdate: lottieAnimationView");
+            }
+        });
+
+        lottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.i(TAG, "onAnimationStart: lottieAnimationView");
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.i(TAG, "onAnimationEnd: lottieAnimationView");
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                Log.i(TAG, "onAnimationCancel: lottieAnimationView");
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                Log.i(TAG, "onAnimationRepeat: lottieAnimationView");
+            }
+        });
+
 
     }
 }
