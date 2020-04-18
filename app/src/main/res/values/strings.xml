@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sample Android Alpha Animation</string>
+    <string name="play_animation">Play animation</string>
+    <string name="image_animation">image_animation</string>
 </resources>
